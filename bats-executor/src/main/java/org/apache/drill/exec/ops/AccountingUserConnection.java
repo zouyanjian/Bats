@@ -19,6 +19,7 @@ package org.apache.drill.exec.ops;
 
 import org.apache.drill.exec.physical.impl.materialize.QueryWritableBatch;
 import org.apache.drill.exec.proto.GeneralRPCProtos.Ack;
+import org.apache.drill.exec.record.RecordBatch;
 import org.apache.drill.exec.rpc.RpcOutcomeListener;
 import org.apache.drill.exec.rpc.UserClientConnection;
 
@@ -27,18 +28,38 @@ import org.apache.drill.exec.rpc.UserClientConnection;
  * sent to User.
  */
 public class AccountingUserConnection {
-  private final UserClientConnection connection;
-  private final SendingAccountor sendingAccountor;
-  private final RpcOutcomeListener<Ack> statusHandler;
+    private final UserClientConnection connection;
+    private final SendingAccountor sendingAccountor;
+    private final RpcOutcomeListener<Ack> statusHandler;
 
-  public AccountingUserConnection(UserClientConnection connection, SendingAccountor sendingAccountor, RpcOutcomeListener<Ack> statusHandler) {
-    this.connection = connection;
-    this.sendingAccountor = sendingAccountor;
-    this.statusHandler = statusHandler;
-  }
+    public AccountingUserConnection(UserClientConnection connection, SendingAccountor sendingAccountor,
+            RpcOutcomeListener<Ack> statusHandler) {
+        this.connection = connection;
+        this.sendingAccountor = sendingAccountor;
+        this.statusHandler = statusHandler;
+    }
 
-  public void sendData(QueryWritableBatch batch) {
-    sendingAccountor.increment();
-    connection.sendData(statusHandler, batch);
-  }
+    public void sendData(QueryWritableBatch batch) {
+        sendingAccountor.increment();
+        connection.sendData(statusHandler, batch);
+        if (connection.needsRawData()) {
+            sendingAccountor.decrement();
+        }
+    }
+
+    public boolean needsRawData() {
+        return connection.needsRawData();
+    }
+
+    public void sendData(RecordBatch batch) {
+        sendingAccountor.increment();
+        connection.sendData(statusHandler, batch);
+        if (connection.needsRawData()) {
+            sendingAccountor.decrement();
+        }
+    }
+
+    public UserClientConnection getConnection() {
+        return connection;
+    }
 }

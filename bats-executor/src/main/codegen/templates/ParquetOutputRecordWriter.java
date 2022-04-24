@@ -22,10 +22,10 @@ import java.lang.RuntimeException;
 import java.util.Arrays;
 
 <@pp.dropOutputFile />
-<@pp.changeOutputFile name="org/apache/drill/exec/store/ParquetOutputRecordWriter.java" />
+<@pp.changeOutputFile name="org/apache/drill/exec/store/parquet/ParquetOutputRecordWriter.java" />
 <#include "/@includes/license.ftl" />
 
-package org.apache.drill.exec.store;
+package org.apache.drill.exec.store.parquet;
 
 import org.apache.drill.shaded.guava.com.google.common.collect.Lists;
 import org.apache.drill.shaded.guava.com.google.common.primitives.Ints;
@@ -34,7 +34,9 @@ import org.apache.drill.common.types.TypeProtos.MinorType;
 import org.apache.drill.exec.expr.TypeHelper;
 import org.apache.drill.exec.expr.holders.*;
 import org.apache.drill.exec.record.BatchSchema;
+import org.apache.drill.exec.store.AbstractRecordWriter;
 import org.apache.drill.exec.store.EventBasedRecordWriter.FieldConverter;
+import org.apache.drill.exec.store.RecordWriter;
 import org.apache.drill.exec.store.parquet.ParquetTypeHelper;
 import org.apache.drill.exec.store.parquet.decimal.DecimalValueWriter;
 import org.apache.drill.exec.vector.*;

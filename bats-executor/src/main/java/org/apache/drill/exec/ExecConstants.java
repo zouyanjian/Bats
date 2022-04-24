@@ -19,7 +19,6 @@ package org.apache.drill.exec;
 
 import org.apache.drill.common.config.DrillConfig;
 import org.apache.drill.exec.physical.impl.common.HashTable;
-import org.apache.drill.exec.rpc.user.InboundImpersonationManager;
 import org.apache.drill.exec.server.options.OptionValidator;
 import org.apache.drill.exec.server.options.OptionValidator.OptionDescription;
 import org.apache.drill.exec.server.options.TypeValidators.AdminUserGroupsValidator;
@@ -44,14 +43,6 @@ public final class ExecConstants {
     // Don't allow instantiation
   }
 
-  public static final String ZK_RETRY_TIMES = "drill.exec.zk.retry.count";
-  public static final String ZK_RETRY_DELAY = "drill.exec.zk.retry.delay";
-  public static final String ZK_CONNECTION = "drill.exec.zk.connect";
-  public static final String ZK_TIMEOUT = "drill.exec.zk.timeout";
-  public static final String ZK_ROOT = "drill.exec.zk.root";
-  public static final String ZK_REFRESH = "drill.exec.zk.refresh";
-  public static final String ZK_ACL_PROVIDER = "drill.exec.zk.acl_provider";
-  public static final String ZK_APPLY_SECURE_ACL = "drill.exec.zk.apply_secure_acl";
   public static final String BIT_RETRY_TIMES = "drill.exec.rpc.bit.server.retry.count";
   public static final String BIT_RETRY_DELAY = "drill.exec.rpc.bit.server.retry.delay";
   public static final String BIT_TIMEOUT = "drill.exec.bit.timeout";
@@ -59,8 +50,6 @@ public final class ExecConstants {
   public static final String INITIAL_BIT_PORT = "drill.exec.rpc.bit.server.port";
   public static final String INITIAL_DATA_PORT = "drill.exec.rpc.bit.server.dataport";
   public static final String BIT_RPC_TIMEOUT = "drill.exec.rpc.bit.timeout";
-  public static final String INITIAL_USER_PORT = "drill.exec.rpc.user.server.port";
-  public static final String USER_RPC_TIMEOUT = "drill.exec.rpc.user.timeout";
   public static final String METRICS_CONTEXT_NAME = "drill.exec.metrics.context";
   public static final String USE_IP_ADDRESS = "drill.exec.rpc.use.ip";
   public static final String CLIENT_RPC_THREADS = "drill.exec.rpc.user.client.threads";
@@ -511,14 +500,7 @@ public final class ExecConstants {
   public static final String KAFKA_POLL_TIMEOUT = "store.kafka.poll.timeout";
   public static final PositiveLongValidator KAFKA_POLL_TIMEOUT_VALIDATOR = new PositiveLongValidator(KAFKA_POLL_TIMEOUT, Long.MAX_VALUE,
       new OptionDescription("Amount of time in milliseconds allotted to the Kafka client to fetch messages from the Kafka cluster; default value is 200."));
-
-  // TODO: We need to add a feature that enables storage plugins to add their own options. Currently we have to declare
-  // in core which is not right. Move this option and above two mongo plugin related options once we have the feature.
-  @Deprecated // TODO: DRILL-6527
-  public static final String HIVE_OPTIMIZE_SCAN_WITH_NATIVE_READERS = "store.hive.optimize_scan_with_native_readers";
-  @Deprecated // TODO: DRILL-6527
-  public static final OptionValidator HIVE_OPTIMIZE_SCAN_WITH_NATIVE_READERS_VALIDATOR = new BooleanValidator(HIVE_OPTIMIZE_SCAN_WITH_NATIVE_READERS,
-      new OptionDescription("Deprecated as of Drill 1.14. Use the store.hive.parquet.optimize_scan_with_native_reader option instead. Enables Drill to use the Drill native reader (instead of the Hive Serde interface) to optimize reads of Parquet-backed tables from Hive. Default is false."));
+ 
   public static final String HIVE_OPTIMIZE_PARQUET_SCAN_WITH_NATIVE_READER = "store.hive.parquet.optimize_scan_with_native_reader";
   public static final OptionValidator HIVE_OPTIMIZE_PARQUET_SCAN_WITH_NATIVE_READER_VALIDATOR =
       new BooleanValidator(HIVE_OPTIMIZE_PARQUET_SCAN_WITH_NATIVE_READER,
@@ -744,39 +726,6 @@ public final class ExecConstants {
   public static final BooleanValidator CTAS_PARTITIONING_HASH_DISTRIBUTE_VALIDATOR = new BooleanValidator(CTAS_PARTITIONING_HASH_DISTRIBUTE,
       new OptionDescription("Uses a hash algorithm to distribute data on partition keys in a CTAS partitioning operation. An alpha option--for experimental use at this stage. Do not use in production systems."));
 
-
-  /**
-   * @deprecated option. It will not take any effect.
-   * The option added as part of DRILL-4577, was used to mark that hive tables should be loaded
-   * for all table names at once. Then as part of DRILL-4826 was added option to regulate bulk size,
-   * because big amount of views was causing performance degradation. After last improvements for
-   * DRILL-7115 both options ({@link ExecConstants#ENABLE_BULK_LOAD_TABLE_LIST_KEY}
-   * and {@link ExecConstants#BULK_LOAD_TABLE_LIST_BULK_SIZE_KEY}) became obsolete and may be removed
-   * in future releases.
-   */
-  @Deprecated
-  public static final String ENABLE_BULK_LOAD_TABLE_LIST_KEY = "exec.enable_bulk_load_table_list";
-
-  /**
-   * @see ExecConstants#ENABLE_BULK_LOAD_TABLE_LIST_KEY
-   */
-  @Deprecated
-  public static final BooleanValidator ENABLE_BULK_LOAD_TABLE_LIST = new BooleanValidator(ENABLE_BULK_LOAD_TABLE_LIST_KEY,
-      new OptionDescription("Deprecated after DRILL-7115 improvement."));
-
-  /**
-   * @see ExecConstants#ENABLE_BULK_LOAD_TABLE_LIST_KEY
-   */
-  @Deprecated
-  public static final String BULK_LOAD_TABLE_LIST_BULK_SIZE_KEY = "exec.bulk_load_table_list.bulk_size";
-
-  /**
-   * @see ExecConstants#ENABLE_BULK_LOAD_TABLE_LIST_KEY
-   */
-  @Deprecated
-  public static final PositiveLongValidator BULK_LOAD_TABLE_LIST_BULK_SIZE = new PositiveLongValidator(BULK_LOAD_TABLE_LIST_BULK_SIZE_KEY, Integer.MAX_VALUE,
-      new OptionDescription("Deprecated after DRILL-7115 improvement."));
-
   /**
    * Option whose value is a comma separated list of admin usernames. Admin users are users who have special privileges
    * such as changing system options.
@@ -804,9 +753,6 @@ public final class ExecConstants {
    * ]
    */
   public static final String IMPERSONATION_POLICIES_KEY = "exec.impersonation.inbound_policies";
-  public static final StringValidator IMPERSONATION_POLICY_VALIDATOR =
-      new InboundImpersonationManager.InboundImpersonationPolicyValidator(IMPERSONATION_POLICIES_KEY);
-
 
   /**
    * Web settings

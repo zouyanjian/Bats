@@ -30,21 +30,18 @@
     <version>5.0.0-SNAPSHOT</version>
 
 	<properties>
-        <dep.junit.version>4.12</dep.junit.version>
+        <dep.junit.version>4.13.1</dep.junit.version>
         <shaded.guava.version>23.0</shaded.guava.version>
         <parquet.version>1.10.0</parquet.version>
-        <sqlline.version>1.7.0</sqlline.version>
-        <jackson.databind.version>2.9.5</jackson.databind.version>
-        <zookeeper.version>3.4.12</zookeeper.version>
+        <jackson.databind.version>2.9.10.7</jackson.databind.version>
         <ojai.version>3.0-mapr-1808</ojai.version>
         <kerby.version>1.0.0-RC2</kerby.version>
         <findbugs.version>3.0.0</findbugs.version>
         <netty.tcnative.classifier />
         <commons.io.version>2.4</commons.io.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13.1</junit.version>
         <hamcrest.core.version>1.3</hamcrest.core.version>
         <maven.embedder.version>3.5.3</maven.embedder.version>
-        <curator.version>2.7.1</curator.version>
         <wiremock.standalone.version>2.5.1</wiremock.standalone.version>
         <jmockit.version>1.43</jmockit.version>
         <logback.version>1.0.13</logback.version>
@@ -53,9 +50,8 @@
         <javassist.version>3.24.0-GA</javassist.version>
         <msgpack.version>0.6.6</msgpack.version>
         <reflections.version>0.9.10</reflections.version>
-        <avro.version>1.8.2</avro.version>
         <metrics.version>4.0.2</metrics.version>
-        <jetty.version>9.3.25.v20180904</jetty.version>
+        <jetty.version>9.3.28.v20191105</jetty.version>
         <jersey.version>2.25.1</jersey.version>
         <asm.version>7.0</asm.version>
         <commons.net.version>3.6</commons.net.version>
@@ -154,44 +150,6 @@
                     <exclusion>
                         <groupId>jdk.tools</groupId>
                         <artifactId>jdk.tools</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.avro</groupId>
-                <artifactId>avro</artifactId>
-                <version>${avro.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.xerial.snappy</groupId>
-                        <artifactId>snappy-java</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-all</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.avro</groupId>
-                <artifactId>avro-mapred</artifactId>
-                <version>${avro.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>servlet-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-all</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -324,79 +282,9 @@
                 <version>1.0.0</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.zookeeper</groupId>
-                <artifactId>zookeeper</artifactId>
-                <version>${zookeeper.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-client</artifactId>
-                <version>${curator.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-framework</artifactId>
-                <version>${curator.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-recipes</artifactId>
-                <version>${curator.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-x-discovery</artifactId>
-                <version>${curator.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>slf4j-log4j12</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>log4j</artifactId>
-                        <groupId>log4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-all</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-test</artifactId>
-                <version>${curator.version}</version>
-                <scope>test</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-runtime</artifactId>
                 <version>${antlr.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>sqlline</groupId>
-                <artifactId>sqlline</artifactId>
-                <version>${sqlline.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-net</groupId>
@@ -423,6 +311,16 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.28</version>
+        </dependency>
+        <dependency>
+            <groupId>org.lealone</groupId>
+            <artifactId>lealone-main</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.lealone.bats</groupId>
             <artifactId>bats-vector</artifactId>
@@ -511,7 +409,7 @@
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
-            <version>2.11.0</version>
+            <version>2.12.0</version>
         </dependency>
         <dependency>
             <groupId>xalan</groupId>
@@ -589,11 +487,6 @@
             <version>2.9.5</version>
         </dependency>
         <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>3.8.0</version>
-        </dependency>
-        <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-afterburner</artifactId>
             <version>2.9.5</version>
@@ -658,31 +551,6 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.beust</groupId>
-            <artifactId>jcommander</artifactId>
-            <version>1.30</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-framework</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-recipes</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-x-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-test</artifactId>
         </dependency>
         <dependency>
             <groupId>com.carrotsearch</groupId>
@@ -786,14 +654,6 @@
             <version>${hadoop.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.avro</groupId>
-            <artifactId>avro</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.avro</groupId>
-            <artifactId>avro-mapred</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
             <scope>test</scope>
@@ -813,38 +673,6 @@
                 </exclusion>
             </exclusions>
             <version>${hadoop.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.avro</groupId>
-            <artifactId>avro</artifactId>
-            <version>${avro.version}</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.xerial.snappy</groupId>
-                    <artifactId>snappy-java</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-all</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>nl.basjes.parse.httpdlog</groupId>
-            <artifactId>httpdlog-parser</artifactId>
-            <version>5.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -909,20 +737,6 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.drewnoakes</groupId>
-            <artifactId>metadata-extractor</artifactId>
-            <version>2.11.0</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.bmartel</groupId>
-            <artifactId>pcapngdecoder</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>sqlline</groupId>
-            <artifactId>sqlline</artifactId>
         </dependency>
         <dependency>
             <groupId>org.antlr</groupId>
@@ -1036,6 +850,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -1043,6 +862,24 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-javacc-resources</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/codegen/templates</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/../bats-optimizer/src/main/codegen/templates</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.drill.tools</groupId>
